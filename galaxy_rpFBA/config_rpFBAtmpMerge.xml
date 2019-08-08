@@ -1,0 +1,23 @@
+<tool id="rpFBAtmpMerge" name="rpFBA tmp Merge" version="1.0">
+  <description>Temporarely merge the heterologous pathway with an SBML to run FBA</description>
+  <requirements>
+		<container type="docker">ibisba/rpbase:latest</container>
+  </requirements>
+  <stdio>
+    <regex match="WARNING:" level="warning" />
+    <regex match="ERROR:root:ChemAxon" level="warning" />
+  </stdio>
+  <command detect_errors="exit_code"><![CDATA[
+    '$__tool_directory__/tool_rpFBAtmpMerge.py' -inSBMLtar '$inSBMLtar' -outSBMLtar '$outSBMLtar' -inModel '$inModel'
+  ]]></command>
+  <inputs>
+    <param name="inSBMLtar" type="data" format="tar" label="rpSBML" />
+    <param name="inModel" type="data" format="sbml" label="SBML" />
+  </inputs>
+  <outputs>
+    <data name="outSBMLtar" format="tar" label="rpSBML FBA" />
+  </outputs>
+  <help>`
+   This is the help section. Should really write something usefull here :) 
+  </help>
+</tool>

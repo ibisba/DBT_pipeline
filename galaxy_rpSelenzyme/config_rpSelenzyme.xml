@@ -1,0 +1,22 @@
+<tool id="rpSelenzyme" name="RP Selenzyme" version="1.0">
+  <description>Read the reaction SMILES from the collection of rpSBML files and query selenzyme for the associated enzymes and their similaroity scores</description>
+  <requirements>
+    <container type="docker">ibisba/rpbase:latest</container>
+  </requirements>
+  <stdio>
+		<regex match="WARNING:" level="warning" />
+	</stdio>
+  <command detect_errors="exit_code"><![CDATA[
+    '$__tool_directory__/tool_rpSelenzyme.py' -inSBMLtar '$inSBMLtar' -outSBMLtar '$outSBMLtar' -url '$url'
+  ]]></command>
+  <inputs>
+    <param name="inSBMLtar" type="data" format="tar" label="rpSBML" />
+		<param name="url" type="text" value="http://http://0.0.0.0:5000/REST" label="Selenzyme REST service URL" optional="true" />
+  </inputs>
+  <outputs>
+    <data name="outSBMLtar" format="tar" label="rpSBML_Selenzyme" />
+  </outputs>
+  <help>
+   This is the help section. Should really write something usefull here :) 
+  </help>
+</tool>

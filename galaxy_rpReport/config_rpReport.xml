@@ -1,0 +1,21 @@
+<tool id="rpReport" name="RP Report" version="1.0">
+  <description>CSV report of the rpSBML</description>
+  <requirements>
+    <container type="docker">ibisba/rpbase:latest</container>
+  </requirements>
+  <stdio>
+		<regex match="WARNING:" level="warning" />
+	</stdio>
+  <command detect_errors="exit_code"><![CDATA[
+    '$__tool_directory__/tool_rpReport.py' -inSBMLtar '$inSBMLtar' -reportCSV '$reportCSV'
+  ]]></command>
+  <inputs>
+    <param name="inSBMLtar" type="data" format="tar" label="rpSBML" />
+  </inputs>
+  <outputs>
+    <data name="reportCSV" format="csv" label="Report" />
+  </outputs>
+  <help>
+   This is the help section. Should really write something usefull here :) 
+  </help>
+</tool>

@@ -1,0 +1,26 @@
+<tool id="rpReaderRP3" name="RP3 Reader" version="1.0">
+  <description>Read the collection of JSONs outputted byt RetroPath3.0 to generate SBML files pathways with mono-component reactions</description>
+  <requirements>
+    <container type="docker">ibisba/rpbase:latest</container>
+  </requirements>
+  <stdio>
+    <regex match="WARNING:" level="warning" />
+	  <regex match="ERROR:" level="error" />
+  </stdio>
+  <command detect_errors="exit_code"><![CDATA[
+    '$__tool_directory__/tool_rp3_rpReader.py' -inJSONtar '$inJSONtar' -outSBMLtar '$outSBMLtar'
+  ]]></command>
+  <inputs>
+    <param name="inJSONtar" type="data" format="tar" label="JSON pathways" />>
+		<!-- <param name="maxRuleIds" type="integer" value="10" label="out_paths max number of substeps per step" /> -->
+  </inputs>
+  <outputs>
+    <data name="outSBMLtar" format="tar" label="rpSBML_RP3" />
+  </outputs>
+  <help>
+  </help>
+</tool>
+
+<!-- 
+    '$__tool_directory__/tool_rpReader.py' -inJSONtar '$inJSONtar' -outSBMLtar '$outSBMLtar' -maxRuleIds '$maxRuleIds'
+-->

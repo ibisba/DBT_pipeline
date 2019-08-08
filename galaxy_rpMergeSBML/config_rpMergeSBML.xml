@@ -1,0 +1,23 @@
+<tool id="rpMergeSBML" name="RP SBML merge" version="1.0">
+  <description>Merge an SBML file to previously generated rpSBML zip objects</description>
+  <requirements>
+    <container type="docker">ibisba/rpbase:latest</container>
+  </requirements>
+  <stdio>
+    <regex match="WARNING:" level="warning" />
+    <regex match="ERROR:root:ChemAxon" level="warning" />
+  </stdio>
+  <command detect_errors="exit_code"><![CDATA[
+    '$__tool_directory__/tool_rpMergeSBML.py' -inSBMLtar '$inSBMLtar' -outSBMLtar '$outSBMLtar' -inModel '$inModel'
+  ]]></command>
+  <inputs>
+    <param name="inSBMLtar" type="data" format="tar" label="rpSBML TAR collection" />
+    <param name="inModel" type="data" format="sbml" label="Input SBML file" />
+  </inputs>
+  <outputs>
+    <data name="outSBMLtar" format="tar" label="rpSBML_merged" />
+  </outputs>
+  <help>
+   This is the help section. Should really write something usefull here :) 
+  </help>
+</tool>

@@ -1,0 +1,19 @@
+<tool id="rpExtractSink" name="Sink from SBML" version="1.0">
+  <description>Generate the sink from an SBML file</description>
+  <requirements>
+    <container type="docker">ibisba/rpbase:latest</container>
+  </requirements>
+  <command detect_errors="exit_code"><![CDATA[
+		'$__tool_directory__/tool_rpExtractSink.py' -inSBML '$inSBML' -outSink '$outSink' -compartmentId '$compartmentId'
+		]]></command>
+  <inputs>
+    <param name="inSBML" type="data" format="sbml" label="SBML" optional="false" />
+    <param name="compartmentId" type="text" value="MNXC3" label="Sink Compartment" optional="true" />
+  </inputs>
+  <outputs>
+    <data name="outSink" format="csv" label="Sink Compounds" />
+  </outputs>
+  <help>
+    Extract the sink from a SBML file from a particular compartment. The tool uses MetaNetX identifiers from the MIRIAM annotations from the SBML and finds the InChI structure from preparsed MetaNetX data.
+  </help>
+</tool>
