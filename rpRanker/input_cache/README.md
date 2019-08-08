@@ -1,0 +1,12 @@
+## To include in the input_cache the following files are required:
+- alberty.json (equilibrator)
+- cc_compounds.json.gz (equilibrator)
+- compounds.csv (equilibrator)
+- rules_rall.tsv (retrorules)
+- rxn_recipes.tsv (retrorules)
+- compounds.tsv (retrorules)
+- chem_xref.tsv (MetaNetX)
+- chem_prop.tsv (MetaNetX)
+- comp_xref.tsv (MetaNetX)
+- comp_prop.tsv (MetaNetX)
+- reac_xref.tsv (MetaNetX)
