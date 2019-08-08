@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!-- A sample job config that explicitly configures job running the way it is configured by default (if there is no explicit config). -->
+<job_conf>
+  <plugins>
+    <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner" workers="4"/>
+    <plugin id="pulsar" type="runner" load="galaxy.jobs.runners.pulsar:PulsarRESTJobRunner" />
+  </plugins>
+  <destinations default="local">
+    <destination id="local" runner="local" />
+    <destination id="docker_local" runner="local">
+      <param id="docker_enabled">true</param>
+      <param id="docker_sudo">false</param>
+      <param id="docker_auto_rm">true</param>
+      <param id="docker_set_user">root</param>
+    </destination>
+    <destination id="remote_cluster" runner="pulsar">
+      <param id="url">http://138.102.56.254:8913</param>
+      <param id="dependency_resolution">remote</param>
+    </destination>
+    <destination id="docker_data" runner="local">
+      <param id="docker_enabled">true</param>
+      <param id="docker_sudo">false</param>
+      <param id="docker_auto_rm">true</param>
+      <param id="docker_set_user">root</param>
+      <param id="docker_run_extra_arguments"> --mount source=rpcache,destination=/home/cache --mount source=component_contribution_data,destination=/home/data</param>
+    </destination>
+    <destination id="docker_data_readonly" runner="local">
+      <param id="docker_enabled">true</param>
+      <param id="docker_sudo">false</param>
+      <param id="docker_auto_rm">true</param>
+      <param id="docker_set_user">root</param>
+      <param id="docker_run_extra_arguments"> --mount source=rpcache,destination=/home/rpInspect/cache,readonly --mount source=component_contribution_data,destination=/home/rpInspect/component_contribution/data,readonly  </param>
+    </destination>
+    <destination id="docker_data_readonly_network" runner="local">
+      <param id="docker_enabled">true</param>
+      <param id="docker_sudo">false</param>
+      <param id="docker_auto_rm">true</param>
+      <param id="docker_set_user">root</param>
+      <param id="docker_run_extra_arguments"> --network host --mount source=rpcache,destination=/home/rpInspect/cache,readonly --mount source=component_contribution_data,destination=/home/rpInspect/component_contribution/data,readonly  </param>
+    </destination>
+  </destinations>
+  <tools>
+    <tool id="retropath2" destination="docker_local" />
+    <tool id="rp2paths" destination="docker_local" />    
+		<!-- <tool id="rpCache" destination="docker_data" /> -->
+    <tool id="rpCofactors" destination="docker_local" />
+    <tool id="rpExtractSink" destination="docker_local" />
+    <tool id="rpFBA" destination="docker_local" />
+    <tool id="rpFBAtmpMerge" destination="docker_local" />
+    <tool id="rpMergeSBML" destination="docker_local" />
+    <tool id="rpReport" destination="docker_local" />
+    <tool id="rpSelenzyme" destination="docker_local" />
+    <tool id="rpThermo" destination="docker_local" />
+  </tools>
+</job_conf>
